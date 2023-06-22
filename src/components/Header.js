@@ -20,7 +20,7 @@ class Header extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, score } = this.props;
     const { hash } = this.state;
     return (
       <header>
@@ -28,21 +28,23 @@ class Header extends Component {
         <p data-testid="header-player-name">{user}</p>
         <p>
           Score:
-          <span data-testid="header-score">0</span>
+          <span data-testid="header-score">{score}</span>
         </p>
       </header>
     );
   }
 }
 
-const mapStateToProps = ({ loginReducer: { user, email } }) => ({
+const mapStateToProps = ({ loginReducer: { user, email }, gameReducer: { score } }) => ({
   user,
   email,
+  score,
 });
 
 Header.propTypes = {
   user: proptypes.string.isRequired,
   email: proptypes.string.isRequired,
+  score: proptypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Header);
