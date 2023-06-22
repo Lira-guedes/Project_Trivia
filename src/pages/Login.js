@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { saveUserDataInGlobalStore } from '../redux/actions';
 
 const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     user: '',
     email: '',
@@ -28,7 +30,10 @@ export default class Login extends Component {
 
   handleClick = () => {
     this.fetchToken();
-    const { history } = this.props;
+    const { history, actionSaveUserData } = this.props;
+    const { email, user } = this.state;
+    const userData = { user, email };
+    actionSaveUserData(userData);
     history.push('/game');
   };
 
@@ -67,8 +72,15 @@ export default class Login extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  actionSaveUserData: (userData) => dispatch(saveUserDataInGlobalStore(userData)),
+});
+
 Login.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
+  actionSaveUserData: propTypes.func.isRequired,
 };
+
+export default connect(null, mapDispatchToProps)(Login);
