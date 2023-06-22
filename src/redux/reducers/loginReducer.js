@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 const loginReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case SAVE_USER_DATA_IN_GLOBAL_STORE:
-    console.log('works');
     return ({
       ...state,
       user: action.userData.user,

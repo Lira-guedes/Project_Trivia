@@ -16,7 +16,6 @@ class Header extends Component {
   getImageHash = () => {
     const { email } = this.props;
     const treatedEmail = email.trim().toLowerCase();
-    console.log(treatedEmail);
     return md5(treatedEmail);
   };
 
