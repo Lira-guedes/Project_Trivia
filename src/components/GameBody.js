@@ -20,11 +20,15 @@ class GameBody extends Component {
 
   fetchQuestions = async () => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
-    const data = await response.json();
-    if (data.response_code === THREE) { this.setState({ success: false }); }
-    if (data.response_code === 0) {
-      return data.results;
+    try {
+      const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+      const data = await response.json();
+      if (data.response_code === THREE) { this.setState({ success: false }); }
+      if (data.response_code === 0) {
+        return data.results;
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
