@@ -28,13 +28,16 @@ class Login extends Component {
     localStorage.setItem('token', data.token);
   };
 
-  handleClick = () => {
-    this.fetchToken();
+  handleClick = ({ target }) => {
     const { history, actionSaveUserData } = this.props;
-    const { email, user } = this.state;
-    const userData = { user, email };
-    actionSaveUserData(userData);
-    history.push('/game');
+    if (target.name === 'game') {
+      this.fetchToken();
+      const { email, user } = this.state;
+      const userData = { user, email };
+      actionSaveUserData(userData);
+    }
+
+    history.push(`/${target.name}`);
   };
 
   validateEmail = (email) => regex.test(email);
@@ -61,11 +64,20 @@ class Login extends Component {
         />
         <button
           type="button"
+          name="game"
           data-testid="btn-play"
           disabled={ disabled }
           onClick={ this.handleClick }
         >
           Play
+        </button>
+        <button
+          type="button"
+          name="settings"
+          data-testid="btn-settings"
+          onClick={ this.handleClick }
+        >
+          Settings
         </button>
       </form>
     );
