@@ -34,12 +34,13 @@ class GameBody extends Component {
 
   render() {
     const { success } = this.state;
+    const { questions } = this.props;
+    console.log(questions);
     return (
       <main>
-        <div>GameBody</div>
         {
           !success ? <Redirect to="/" push />
-            : <QuestionContainer />
+            : questions && <QuestionContainer question={ questions[0] } />
         }
 
       </main>
@@ -47,12 +48,17 @@ class GameBody extends Component {
   }
 }
 
+const mapStateToProps = ({ gameReducer: { questions } }) => ({
+  questions,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   actionSaveQuestions: (questions) => dispatch(saveQuestions(questions)),
 });
 
 GameBody.propTypes = {
   actionSaveQuestions: propTypes.func.isRequired,
+  questions: propTypes.arrayOf().isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(GameBody);
+export default connect(mapStateToProps, mapDispatchToProps)(GameBody);
