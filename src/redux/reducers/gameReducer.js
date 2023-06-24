@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   score: 0,
 };
 
-const gameReducer = (state = INITIAL_STATE, action) => {
+const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case SAVE_QUESTIONS:
     return ({
@@ -16,4 +16,4 @@ const gameReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default gameReducer;
+export default player;
