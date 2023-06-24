@@ -40,6 +40,7 @@ export default class AnswerButtons extends Component {
 
   render() {
     const { sortedAnswers } = this.state;
+    const { disabled } = this.props;
     return (
       <section data-testid="answer-options">
         {
@@ -49,6 +50,8 @@ export default class AnswerButtons extends Component {
               data-testId={ id }
               className={ id }
               onClick={ (e) => this.handleClick(e) }
+              disabled={ disabled }
+
             >
               {answer}
 
@@ -64,4 +67,5 @@ AnswerButtons.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
   showNextButton: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
