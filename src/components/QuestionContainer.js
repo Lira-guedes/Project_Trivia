@@ -2,14 +2,38 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AnswerButtons from './AnswerButtons';
 
+const INTERVAL = 1000;
+
 export default class QuestionContainer extends Component {
   state = {
     next: false,
+    disabled: false,
+    counter: 30,
   };
 
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState((prevState) => ({
+        counter: prevState.counter - 1,
+      }));
+    }, INTERVAL);
+  }
+
+  componentDidUpdate() {
+    const { counter, disabled } = this.state;
+    if (counter === 0 && !disabled) {
+      clearInterval(this.timer);
+      this.setState({ disabled: true, next: true });
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   showNextButton = () => {
-    this.setState({ next: true });
-    console.log('showNextButton');
+    this.setState({ next: true, disabled: true });
+    clearInterval(this.timer);
   };
 
   render() {
@@ -19,18 +43,19 @@ export default class QuestionContainer extends Component {
         question,
         correct_answer: correctAnswer, incorrect_answers: incorrectAnswers },
     } = this.props;
-    const { next } = this.state;
+    const { next, disabled } = this.state;
     return (
-      <main>
+      <>
         <h2 data-testId="question-category">{category}</h2>
         <p data-testId="question-text">{question}</p>
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
           showNextButton={ this.showNextButton }
+          disabled={ disabled }
         />
         {next && <button data-testId="btn-next">Next</button>}
-      </main>
+      </>
     );
   }
 }
