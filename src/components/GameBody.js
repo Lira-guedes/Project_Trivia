@@ -52,7 +52,7 @@ class GameBody extends Component {
   }
 }
 
-const mapStateToProps = ({ gameReducer: { questions } }) => ({
+const mapStateToProps = ({ player: { questions } }) => ({
   questions,
 });
 
