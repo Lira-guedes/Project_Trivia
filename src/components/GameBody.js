@@ -15,15 +15,20 @@ class GameBody extends Component {
     const { actionSaveQuestions } = this.props;
     const results = await this.fetchQuestions();
     actionSaveQuestions(results);
-    console.log(results);
   }
+
+  handleExpiredToken = () => {
+    this.setState({ success: false });
+    localStorage.removeItem('token');
+  };
 
   fetchQuestions = async () => {
     const token = localStorage.getItem('token');
     try {
       const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
       const data = await response.json();
-      if (data.response_code === THREE) { this.setState({ success: false }); }
+      // const data = { response_code: 3 };
+      if (data.response_code === THREE) { this.handleExpiredToken(); }
       if (data.response_code === 0) {
         return data.results;
       }
@@ -34,12 +39,12 @@ class GameBody extends Component {
 
   render() {
     const { success } = this.state;
+    const { questions } = this.props;
     return (
       <main>
-        <div>GameBody</div>
         {
           !success ? <Redirect to="/" push />
-            : <QuestionContainer />
+            : questions && <QuestionContainer question={ questions[0] } />
         }
 
       </main>
@@ -47,12 +52,17 @@ class GameBody extends Component {
   }
 }
 
+const mapStateToProps = ({ player: { questions } }) => ({
+  questions,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   actionSaveQuestions: (questions) => dispatch(saveQuestions(questions)),
 });
 
 GameBody.propTypes = {
   actionSaveQuestions: propTypes.func.isRequired,
+  questions: propTypes.arrayOf().isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(GameBody);
+export default connect(mapStateToProps, mapDispatchToProps)(GameBody);

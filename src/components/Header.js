@@ -35,7 +35,7 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ loginReducer: { user, email }, gameReducer: { score } }) => ({
+const mapStateToProps = ({ loginReducer: { user, email }, player: { score } }) => ({
   user,
   email,
   score,
