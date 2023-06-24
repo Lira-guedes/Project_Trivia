@@ -24,6 +24,7 @@ export default class AnswerButtons extends Component {
   };
 
   handleClick = () => {
+    const { showNextButton } = this.props;
     const buttons = Array.from(document.querySelectorAll('button'));
     buttons.forEach((button) => {
       if (button.className === 'correct-answer') {
@@ -34,7 +35,7 @@ export default class AnswerButtons extends Component {
         button.style.border = '3px solid red';
       }
     });
-    console.log(buttons);
+    showNextButton();
   };
 
   render() {
@@ -62,4 +63,5 @@ export default class AnswerButtons extends Component {
 AnswerButtons.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showNextButton: PropTypes.func.isRequired,
 };

@@ -3,11 +3,23 @@ import PropTypes from 'prop-types';
 import AnswerButtons from './AnswerButtons';
 
 export default class QuestionContainer extends Component {
+  state = {
+    next: false,
+  };
+
+  showNextButton = () => {
+    this.setState({ next: true });
+    console.log('showNextButton');
+  };
+
   render() {
-    const { question: {
-      category,
-      question,
-      correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } } = this.props;
+    const {
+      question: {
+        category,
+        question,
+        correct_answer: correctAnswer, incorrect_answers: incorrectAnswers },
+    } = this.props;
+    const { next } = this.state;
     return (
       <main>
         <h2 data-testId="question-category">{category}</h2>
@@ -15,7 +27,9 @@ export default class QuestionContainer extends Component {
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
+          showNextButton={ this.showNextButton }
         />
+        {next && <button data-testId="btn-next">Next</button>}
       </main>
     );
   }
