@@ -18,12 +18,18 @@ class GameBody extends Component {
     console.log(results);
   }
 
+  handleExpiredToken = () => {
+    this.setState({ success: false });
+    localStorage.removeItem('token');
+  };
+
   fetchQuestions = async () => {
     const token = localStorage.getItem('token');
     try {
       const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
       const data = await response.json();
-      if (data.response_code === THREE) { this.setState({ success: false }); }
+      // const data = { response_code: 3 };
+      if (data.response_code === THREE) { this.handleExpiredToken(); }
       if (data.response_code === 0) {
         return data.results;
       }
@@ -35,7 +41,6 @@ class GameBody extends Component {
   render() {
     const { success } = this.state;
     const { questions } = this.props;
-    console.log(questions);
     return (
       <main>
         {

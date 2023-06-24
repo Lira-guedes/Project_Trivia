@@ -10,11 +10,12 @@ export default class QuestionContainer extends Component {
       correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } } = this.props;
     return (
       <main>
-        <h2>{category}</h2>
-        <p>{question}</p>
+        <h2 data-testId="question-category">{category}</h2>
+        <p data-testId="question-text">{question}</p>
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
+          data-testid="answer-options"
         />
       </main>
     );

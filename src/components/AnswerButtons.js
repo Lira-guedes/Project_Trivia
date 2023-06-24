@@ -13,9 +13,12 @@ export default class AnswerButtons extends Component {
 
   sortAnswers = () => {
     const { correctAnswer, incorrectAnswers } = this.props;
+    const correctAnswerObject = { id: 'correct-answer', answer: correctAnswer };
+    const incorrectAnswersObject = incorrectAnswers
+      .map((answer) => ({ id: 'wrong-answer', answer }));
     console.log(incorrectAnswers);
     // Retorna um valor aleatório entre -0.5 e 0.5 para cada iteração no array, gerando uma ordem aleatória.
-    const answers = [correctAnswer, ...incorrectAnswers]
+    const answers = [correctAnswerObject, ...incorrectAnswersObject]
       .sort(() => Math.random() - ZERO_DOT_FIFE);
 
     this.setState({ sortedAnswers: answers });
@@ -23,11 +26,12 @@ export default class AnswerButtons extends Component {
 
   render() {
     const { sortedAnswers } = this.state;
+    console.log(sortedAnswers);
     return (
-      <section>
+      <section data-testid="answer-options">
         {
-          sortedAnswers && sortedAnswers.map((answer) => (
-            <button key={ answer }>{answer}</button>
+          sortedAnswers && sortedAnswers.map(({ answer, id }) => (
+            <button key={ answer } data-testId={ id }>{answer}</button>
           ))
         }
       </section>
