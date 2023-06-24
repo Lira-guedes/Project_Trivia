@@ -16,7 +16,6 @@ export default class AnswerButtons extends Component {
     const correctAnswerObject = { id: 'correct-answer', answer: correctAnswer };
     const incorrectAnswersObject = incorrectAnswers
       .map((answer) => ({ id: 'wrong-answer', answer }));
-    console.log(incorrectAnswers);
     // Retorna um valor aleatório entre -0.5 e 0.5 para cada iteração no array, gerando uma ordem aleatória.
     const answers = [correctAnswerObject, ...incorrectAnswersObject]
       .sort(() => Math.random() - ZERO_DOT_FIFE);
@@ -24,14 +23,35 @@ export default class AnswerButtons extends Component {
     this.setState({ sortedAnswers: answers });
   };
 
+  handleClick = () => {
+    const buttons = Array.from(document.querySelectorAll('button'));
+    buttons.forEach((button) => {
+      if (button.className === 'correct-answer') {
+        button.style.backgroundColor = ' rgb(6, 240, 15)';
+        button.style.border = '3px solid rgb(6, 240, 15)';
+      } else {
+        button.style.backgroundColor = 'red';
+        button.style.border = '3px solid red';
+      }
+    });
+    console.log(buttons);
+  };
+
   render() {
     const { sortedAnswers } = this.state;
-    console.log(sortedAnswers);
     return (
       <section data-testid="answer-options">
         {
           sortedAnswers && sortedAnswers.map(({ answer, id }) => (
-            <button key={ answer } data-testId={ id }>{answer}</button>
+            <button
+              key={ answer }
+              data-testId={ id }
+              className={ id }
+              onClick={ (e) => this.handleClick(e) }
+            >
+              {answer}
+
+            </button>
           ))
         }
       </section>

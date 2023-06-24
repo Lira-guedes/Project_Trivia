@@ -15,7 +15,6 @@ export default class QuestionContainer extends Component {
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
-          data-testid="answer-options"
         />
       </main>
     );

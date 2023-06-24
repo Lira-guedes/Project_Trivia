@@ -15,7 +15,6 @@ class GameBody extends Component {
     const { actionSaveQuestions } = this.props;
     const results = await this.fetchQuestions();
     actionSaveQuestions(results);
-    console.log(results);
   }
 
   handleExpiredToken = () => {
