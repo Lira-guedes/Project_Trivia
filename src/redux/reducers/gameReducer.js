@@ -1,4 +1,4 @@
-import { SAVE_QUESTIONS } from '../actions';
+import { SAVE_QUESTIONS, SAVE_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   score: 0,
@@ -10,6 +10,11 @@ const player = (state = INITIAL_STATE, action) => {
     return ({
       ...state,
       questions: action.questions,
+    });
+  case SAVE_SCORE:
+    return ({
+      ...state,
+      score: state.score + action.score,
     });
   default:
     return state;
