@@ -16,6 +16,7 @@ export default class QuestionContainer extends Component {
       this.setState((prevState) => ({
         counter: prevState.counter - 1,
       }));
+      console.log(this.state.counter);
     }, INTERVAL);
   }
 
@@ -47,7 +48,7 @@ export default class QuestionContainer extends Component {
     return (
       <>
         <h2 data-testId="question-category">{category}</h2>
-        <p data-testId="question-text">{question}</p>
+        <p data-testId="question-text">{question.replace(/&quot;/g, '"')}</p>
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }

@@ -53,7 +53,7 @@ export default class AnswerButtons extends Component {
               disabled={ disabled }
 
             >
-              {answer}
+              {answer.replace(/&quot;/g, '"')}
 
             </button>
           ))
