@@ -43,7 +43,7 @@ export default class QuestionContainer extends Component {
         question,
         correct_answer: correctAnswer, incorrect_answers: incorrectAnswers },
     } = this.props;
-    const { next, disabled } = this.state;
+    const { next, disabled, counter } = this.state;
     return (
       <>
         <h2 data-testId="question-category">{category}</h2>
@@ -53,6 +53,7 @@ export default class QuestionContainer extends Component {
           incorrectAnswers={ incorrectAnswers }
           showNextButton={ this.showNextButton }
           disabled={ disabled }
+          timer={ counter }
         />
         {next && <button data-testId="btn-next">Next</button>}
       </>

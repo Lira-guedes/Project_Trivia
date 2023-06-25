@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addScore } from '../redux/actions';
 
 const ZERO_DOT_FIFE = 0.5;
-export default class AnswerButtons extends Component {
+class AnswerButtons extends Component {
   state = {
     sortedAnswers: [],
   };
@@ -23,8 +25,9 @@ export default class AnswerButtons extends Component {
     this.setState({ sortedAnswers: answers });
   };
 
-  handleClick = () => {
-    const { showNextButton } = this.props;
+  handleClick = ({ target }) => {
+    const { showNextButton, correctAnswer,
+      dispatch, timer, difficultyQuestion } = this.props;
     const buttons = Array.from(document.querySelectorAll('button'));
     buttons.forEach((button) => {
       if (button.className === 'correct-answer') {
@@ -36,6 +39,21 @@ export default class AnswerButtons extends Component {
       }
     });
     showNextButton();
+
+    // Contador de score:
+    const minimumScore = 10;
+    const difficultyPoints = {
+      hard: 3,
+      medium: 2,
+      easy: 1,
+    };
+
+    const difficulty = difficultyPoints[difficultyQuestion[0].difficulty];
+
+    const points = minimumScore + (timer * difficulty);
+    if (target.textContent === correctAnswer) {
+      dispatch(addScore(points));
+    }
   };
 
   render() {
@@ -63,9 +81,18 @@ export default class AnswerButtons extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  difficultyQuestion: state.player.questions,
+});
+
 AnswerButtons.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
   showNextButton: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  timer: PropTypes.number.isRequired,
+  difficultyQuestion: PropTypes.objectOf.isRequired,
 };
+
+export default connect(mapStateToProps)(AnswerButtons);

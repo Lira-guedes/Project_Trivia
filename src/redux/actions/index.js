@@ -1,12 +1,18 @@
 export const SAVE_USER_DATA_IN_GLOBAL_STORE = 'SAVE_USER_DATA_IN_GLOBAL_STORE';
 export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
+export const SAVE_SCORE = 'SAVE_SCORE';
 
 export const saveUserDataInGlobalStore = (userData) => ({
   type: SAVE_USER_DATA_IN_GLOBAL_STORE,
   userData,
 });
 
-export const saveQuestions = (questions) => ({
+export const saveQuestions = (questions, score) => ({
   type: SAVE_QUESTIONS,
   questions,
+  score,
+});
+
+export const addScore = (score, authReducer) => ({
+  type: SAVE_SCORE, score, authReducer,
 });
