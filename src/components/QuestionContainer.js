@@ -16,7 +16,6 @@ export default class QuestionContainer extends Component {
       this.setState((prevState) => ({
         counter: prevState.counter - 1,
       }));
-      console.log(this.state.counter);
     }, INTERVAL);
   }
 
