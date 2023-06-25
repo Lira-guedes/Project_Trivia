@@ -47,7 +47,7 @@ export default class QuestionContainer extends Component {
     return (
       <>
         <h2 data-testId="question-category">{category}</h2>
-        <p data-testId="question-text">{question.replace(/&quot;/g, '"')}</p>
+        <p data-testId="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"')}</p>
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
