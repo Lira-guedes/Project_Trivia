@@ -1,7 +1,19 @@
-import { SAVE_QUESTIONS, SAVE_SCORE } from '../actions';
+import { GET_CURRENT_QUESTION, SAVE_QUESTIONS, SAVE_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   score: 0,
+  questions: [
+    {
+      category: '',
+      type: '',
+      difficulty: '',
+      question: '',
+      correct_answer: '',
+      incorrect_answers: [
+
+      ],
+    },
+  ],
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -16,6 +28,14 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       score: state.score + action.score,
     });
+
+  case GET_CURRENT_QUESTION:
+    return (
+      {
+        ...state,
+        currentQuestion: action.questions[action.index],
+      });
+
   default:
     return state;
   }

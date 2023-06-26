@@ -2,20 +2,31 @@ import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { saveQuestions } from '../redux/actions';
+import { getCurrentQuestion, saveQuestions } from '../redux/actions';
 import QuestionContainer from './QuestionContainer';
 
 const THREE = 3;
 class GameBody extends Component {
   state = {
     success: true,
+    index: 0,
   };
 
   async componentDidMount() {
-    const { actionSaveQuestions } = this.props;
-    const results = await this.fetchQuestions();
-    actionSaveQuestions(results);
+    const { actionSaveQuestions, actionGetCurrentQuestion } = this.props;
+    const { index } = this.state;
+    const questions = await this.fetchQuestions();
+    actionSaveQuestions(questions);
+    actionGetCurrentQuestion(questions, index);
   }
+
+  handleNextButtonClick = () => {
+    const { questions, actionGetCurrentQuestion } = this.props;
+    const { index } = this.state;
+    this.setState((prevState) => ({ index: prevState.index + 1 }));
+    actionGetCurrentQuestion(questions, index);
+    console.log('foi');
+  };
 
   handleExpiredToken = () => {
     this.setState({ success: false });
@@ -39,30 +50,39 @@ class GameBody extends Component {
 
   render() {
     const { success } = this.state;
-    const { questions } = this.props;
+    const { currentQuestion } = this.props;
     return (
       <main>
         {
           !success ? <Redirect to="/" push />
-            : questions && <QuestionContainer question={ questions[0] } />
+            : (
+              currentQuestion && <QuestionContainer
+                currentQuestion={ currentQuestion }
+                handleNextClick={ this.handleNextButtonClick }
+              />)
         }
-
       </main>
     );
   }
 }
 
-const mapStateToProps = ({ player: { questions } }) => ({
+const mapStateToProps = ({ player: { questions, currentQuestion } }) => ({
   questions,
+  currentQuestion,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actionSaveQuestions: (questions) => dispatch(saveQuestions(questions)),
+  actionGetCurrentQuestion: (questions, index) => dispatch(
+    getCurrentQuestion(questions, index),
+  ),
 });
 
 GameBody.propTypes = {
   actionSaveQuestions: propTypes.func.isRequired,
-  questions: propTypes.arrayOf().isRequired,
+  actionGetCurrentQuestion: propTypes.func.isRequired,
+  questions: propTypes.arrayOf(propTypes.shape()).isRequired,
+  currentQuestion: propTypes.shape().isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameBody);

@@ -36,9 +36,10 @@ class Login extends Component {
       const { email, user } = this.state;
       const userData = { user, email };
       actionSaveUserData(userData);
+      history.push(`/${target.name}`);
+    } else {
+      history.push(`/${target.name}`);
     }
-
-    history.push(`/${target.name}`);
   };
 
   validateEmail = (email) => regex.test(email);

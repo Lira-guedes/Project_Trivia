@@ -36,9 +36,24 @@ export default class QuestionContainer extends Component {
     clearInterval(this.timer);
   };
 
+  handleNextButton = () => {
+    const { handleNextClick } = this.props;
+    const buttons = Array.from(document.querySelectorAll('button'));
+    buttons.forEach((button) => {
+      if (button.className === 'correct-answer') {
+        button.classList.remove('correct-answer-colored');
+      } else {
+        button.classList.remove('incorrect-answer-colored');
+      }
+    });
+    this.setState({ next: false, disabled: false });
+    clearInterval(this.timer);
+    handleNextClick();
+  };
+
   render() {
     const {
-      question: {
+      currentQuestion: {
         category,
         question,
         correct_answer: correctAnswer, incorrect_answers: incorrectAnswers },
@@ -47,7 +62,7 @@ export default class QuestionContainer extends Component {
     return (
       <>
         <h2 data-testId="question-category">{category}</h2>
-        <p data-testId="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"')}</p>
+        <p data-testId="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"').replace(/&rsquo;/g, '\'')}</p>
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
@@ -55,17 +70,26 @@ export default class QuestionContainer extends Component {
           disabled={ disabled }
           timer={ counter }
         />
-        {next && <button data-testId="btn-next">Next</button>}
+        {next && (
+          <button
+            data-testId="btn-next"
+            onClick={ this.handleNextButton }
+          >
+            Next
+
+          </button>
+        )}
       </>
     );
   }
 }
 
 QuestionContainer.propTypes = {
-  question: PropTypes.shape({
+  currentQuestion: PropTypes.shape({
     category: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
     correct_answer: PropTypes.string.isRequired,
     incorrect_answers: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  handleNextClick: PropTypes.func.isRequired,
 };
