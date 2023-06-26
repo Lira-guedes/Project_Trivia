@@ -43,7 +43,9 @@ body {
   background: #19bc8b;
   border: none;
   border-radius: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) , 0 3px 6px rgba(0, 0, 0, 0.23);
   color: #3f3e3e;
+  font-size: medium;
   height: 40px;
   margin-left: 15px;
   width: 130px;

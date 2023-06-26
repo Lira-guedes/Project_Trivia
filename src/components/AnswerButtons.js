@@ -60,23 +60,25 @@ class AnswerButtons extends Component {
     const { sortedAnswers } = this.state;
     const { disabled } = this.props;
     return (
-      <section data-testid="answer-options">
-        {
-          sortedAnswers && sortedAnswers.map(({ answer, id }) => (
-            <button
-              key={ answer }
-              data-testId={ id }
-              className={ id }
-              onClick={ (e) => this.handleClick(e) }
-              disabled={ disabled }
+      <div className="answers-btn">
+        <section data-testid="answer-options">
+          {
+            sortedAnswers && sortedAnswers.map(({ answer, id }) => (
+              <button
+                key={ answer }
+                data-testId={ id }
+                className={ id }
+                onClick={ (e) => this.handleClick(e) }
+                disabled={ disabled }
 
-            >
-              {answer.replace(/&#039;/g, '\'').replace(/&quot;/g, '"')}
+              >
+                {answer.replace(/&#039;/g, '\'').replace(/&quot;/g, '"')}
 
-            </button>
-          ))
-        }
-      </section>
+              </button>
+            ))
+          }
+        </section>
+      </div>
     );
   }
 }
