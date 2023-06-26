@@ -45,7 +45,7 @@ export default class QuestionContainer extends Component {
     } = this.props;
     const { next, disabled, counter } = this.state;
     return (
-      <div>
+      <div className="questions-container">
         <div className="category">
           <h2 data-testId="question-category">{category}</h2>
         </div>

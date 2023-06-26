@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import proptypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import '../style/game.css';
+import Logo from '../trivia.png';
 
 class Header extends Component {
   state = {
@@ -25,7 +26,7 @@ class Header extends Component {
     const { hash } = this.state;
     return (
       <header>
-        <div className="header-logo"><img alt="trivia-logo" src="./trivia.png" /></div>
+        <div className="header-logo"><img alt="trivia-logo" src={ Logo } /></div>
         <div className="player">
           <img alt="User Avatar" src={ `https://www.gravatar.com/avatar/${hash}` } data-testid="header-profile-picture" />
           <div className="user">

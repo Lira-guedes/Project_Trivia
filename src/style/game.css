@@ -2,25 +2,28 @@ body {
   background: #1a2226;
   color: white;
   font-family: monospace;
-  height: 895px;
   text-align: center;
 }
 
 .header-logo {
   background: #19bc8b;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) , 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin-bottom: 40px;
-  padding: 15px;
+  margin-bottom: 60px;
+  padding: 5px;
+}
+
+.header-logo img {
+  height: 90px;
 }
 
 .player {
   border: none;
-  border-bottom: 2px solid #19bc8b;
+  border-left: 4px solid #19bc8b;
   border-radius: 10px;
+  border-right: 4px solid #19bc8b;
   display: flex;
   justify-content: center;
-  margin: 0 550px;
-  margin-bottom: 80px;
+  margin: 0 490px;
   padding: 10px;
 }
 
@@ -34,6 +37,17 @@ body {
   margin: 15px;
 }
 
+.user h3 {
+  border: none;
+  border-bottom: 1px solid #19bc8b;
+  margin-right: 25px;
+  padding-bottom: 5px;
+}
+
+.questions-container {
+  top: 20px;
+}
+
 .category {
   color: #24e0a7;
   margin-top: 60px;
@@ -41,9 +55,9 @@ body {
 
 .questions {
   background-color: #30353f;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) , 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin: 0 230px;
+  margin: 0 90px;
   padding: 70px 30px;
 }
 
@@ -54,13 +68,13 @@ body {
 button {
   background: #19bc8b;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) , 0 3px 6px rgba(0, 0, 0, 0.23);
   color: #3f3e3e;
   font-size: 14px;
   height: auto;
   margin-left: 20px;
-  padding: 12px;
+  padding: 8px;
   width: 130px;
 }
 
