@@ -29,11 +29,11 @@ class Header extends Component {
         <div className="player">
           <img alt="User Avatar" src={ `https://www.gravatar.com/avatar/${hash}` } data-testid="header-profile-picture" />
           <div className="user">
-            <h2 data-testid="header-player-name">{user}</h2>
-            <h2>
+            <h3 data-testid="header-player-name">{user}</h3>
+            <h3>
               Score:
               <span data-testid="header-score">{score}</span>
-            </h2>
+            </h3>
           </div>
         </div>
       </header>
