@@ -90,7 +90,7 @@ AnswerButtons.propTypes = {
   disabled: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
-  difficultyQuestion: PropTypes.objectOf.isRequired,
+  difficultyQuestion: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default connect(mapStateToProps)(AnswerButtons);
