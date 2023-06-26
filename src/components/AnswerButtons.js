@@ -31,11 +31,14 @@ class AnswerButtons extends Component {
     const buttons = Array.from(document.querySelectorAll('button'));
     buttons.forEach((button) => {
       if (button.className === 'correct-answer') {
-        button.style.backgroundColor = ' rgb(6, 240, 15)';
-        button.style.border = '3px solid rgb(6, 240, 15)';
+        button.classList.add('correct-answer-colored');
+        /* button.style.backgroundColor = ' rgb(6, 240, 15)';
+        button.style.border = '3px solid rgb(6, 240, 15)'; */
       } else {
+        button.classList.add('incorrect-answer-colored');
+        /*
         button.style.backgroundColor = 'red';
-        button.style.border = '3px solid red';
+        button.style.border = '3px solid red'; */
       }
     });
     showNextButton();
@@ -92,7 +95,7 @@ AnswerButtons.propTypes = {
   disabled: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
-  difficultyQuestion: PropTypes.objectOf.isRequired,
+  difficultyQuestion: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default connect(mapStateToProps)(AnswerButtons);
