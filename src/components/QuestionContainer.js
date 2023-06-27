@@ -63,9 +63,11 @@ export default class QuestionContainer extends Component {
       <div className="questions-container">
         <div className="category">
           <h2 data-testid="question-category">{category}</h2>
+          <h2 data-testid="question-category">{category}</h2>
         </div>
         <div className="questions">
           <h2 data-testid="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"').replace(/&rsquo;/g, '\'')}</h2>
+          <h2 data-testid="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"')}</h2>
           <AnswerButtons
             correctAnswer={ correctAnswer }
             incorrectAnswers={ incorrectAnswers }
@@ -81,7 +83,6 @@ export default class QuestionContainer extends Component {
               onClick={ this.handleNextButton }
             >
               Next
-
             </button>
           )}
         </div>
