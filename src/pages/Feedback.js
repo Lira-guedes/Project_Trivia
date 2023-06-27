@@ -5,7 +5,6 @@ import Header from '../components/Header';
 export default class Feedback extends Component {
   handleClick = () => {
     const { history } = this.props;
-    console.log(this.props);
     history.push('/');
   };
 
