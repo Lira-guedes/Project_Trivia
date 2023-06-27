@@ -89,22 +89,22 @@ button:hover {
 
 .correct-answer-colored {
   background-color: rgb(6, 240, 15);
-  border: 1px solid rgb(6, 240, 15);
+  border: 3px solid rgb(6, 240, 15);
 }
 
 .correct-answer-colored:hover {
   background-color: rgb(6, 240, 15);
-  border: 1px solid rgb(6, 240, 15);
+  border: 3px solid rgb(6, 240, 15);
   color: black;
 }
 
 .incorrect-answer-colored {
   background-color: red;
-  border: 1px solid red;
+  border: 3px solid red;
 }
 
 .incorrect-answer-colored:hover {
   background-color: red;
-  border: 1px solid red;
+  border: 3px solid red;
   color: black;
 }
