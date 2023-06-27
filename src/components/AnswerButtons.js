@@ -72,7 +72,7 @@ class AnswerButtons extends Component {
           sortedAnswers && sortedAnswers.map(({ answer, id }) => (
             <button
               key={ answer }
-              data-testId={ id }
+              data-testid={ id }
               className={ id }
               onClick={ (e) => this.handleClick(e) }
               disabled={ disabled }

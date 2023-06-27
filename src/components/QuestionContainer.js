@@ -61,8 +61,8 @@ export default class QuestionContainer extends Component {
     const { next, disabled, counter } = this.state;
     return (
       <>
-        <h2 data-testId="question-category">{category}</h2>
-        <p data-testId="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"').replace(/&rsquo;/g, '\'')}</p>
+        <h2 data-testid="question-category">{category}</h2>
+        <p data-testid="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"').replace(/&rsquo;/g, '\'')}</p>
         <AnswerButtons
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
@@ -72,7 +72,7 @@ export default class QuestionContainer extends Component {
         />
         {next && (
           <button
-            data-testId="btn-next"
+            data-testid="btn-next"
             onClick={ this.handleNextButton }
           >
             Next
