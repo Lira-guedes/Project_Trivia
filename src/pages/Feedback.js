@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 const THREE = 3;
@@ -38,10 +37,9 @@ class Feedback extends Component {
     const { feedbackMessage } = this.state;
     return (
       <>
-        <main>
-          <Header />
-          <p data-testid="feedback-text">{ feedbackMessage }</p>
-        </div>
+
+        <Header />
+        <p data-testid="feedback-text">{ feedbackMessage }</p>
         <div>
           <button
             data-testid="btn-play-again"
