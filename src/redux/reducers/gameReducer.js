@@ -12,7 +12,6 @@ const INITIAL_STATE = {
       question: '',
       correct_answer: '',
       incorrect_answers: [
-
       ],
     },
   ],
@@ -44,7 +43,6 @@ const player = (state = INITIAL_STATE, action) => {
         ...state,
         correct_question: action.correct,
       });
-
   default:
     return state;
   }
