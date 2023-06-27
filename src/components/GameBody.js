@@ -14,11 +14,9 @@ class GameBody extends Component {
   };
 
   async componentDidMount() {
-    const { actionSaveQuestions, actionGetCurrentQuestion } = this.props;
-    const { index } = this.state;
+    const { actionSaveQuestions } = this.props;
     const questions = await this.fetchQuestions();
     actionSaveQuestions(questions);
-    actionGetCurrentQuestion(questions, index);
   }
 
   handleNextButtonClick = () => {
@@ -38,6 +36,8 @@ class GameBody extends Component {
   };
 
   fetchQuestions = async () => {
+    const { actionGetCurrentQuestion } = this.props;
+    const { index } = this.state;
     const token = localStorage.getItem('token');
     try {
       const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
@@ -45,6 +45,8 @@ class GameBody extends Component {
       // const data = { response_code: 3 };
       if (data.response_code === THREE) { this.handleExpiredToken(); }
       if (data.response_code === 0) {
+        actionGetCurrentQuestion(data.results, index);
+
         return data.results;
       }
     } catch (e) {
@@ -55,7 +57,7 @@ class GameBody extends Component {
   render() {
     const { success } = this.state;
     const { currentQuestion } = this.props;
-    console.log(currentQuestion);
+    // console.log(currentQuestion);
     return (
       <main>
         {
