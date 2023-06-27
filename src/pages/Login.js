@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { saveUserDataInGlobalStore } from '../redux/actions';
 import '../style/login.css';
+import Logo from '../trivia.png';
 
 const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -47,50 +48,52 @@ class Login extends Component {
   render() {
     const { disabled, user, email } = this.state;
     return (
-      <div className="login-box">
-        <img alt="trivia-logo" src="./trivia.png" />
-        <form className="login-form">
-          <label className="form-label">
-            Name
-            <input
-              type="text"
-              data-testid="input-player-name"
-              name="user"
-              value={ user }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label className="form-label">
-            Email
-            <input
-              type="email"
-              name="email"
-              value={ email }
-              onChange={ this.handleChange }
-              data-testid="input-gravatar-email"
-            />
-          </label>
-          <button
-            className="btn"
-            type="button"
-            name="game"
-            data-testid="btn-play"
-            disabled={ disabled }
-            onClick={ this.handleClick }
-          >
-            Play
-          </button>
-          <button
-            className="btn"
-            type="button"
-            name="settings"
-            data-testid="btn-settings"
-            onClick={ this.handleClick }
-          >
-            Settings
-          </button>
-        </form>
-      </div>
+      <main>
+        <div className="login-box">
+          <img alt="trivia-logo" src={ Logo } />
+          <form className="login-form">
+            <label className="form-label">
+              Name
+              <input
+                type="text"
+                data-testid="input-player-name"
+                name="user"
+                value={ user }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <label className="form-label">
+              Email
+              <input
+                type="email"
+                name="email"
+                value={ email }
+                onChange={ this.handleChange }
+                data-testid="input-gravatar-email"
+              />
+            </label>
+            <button
+              className="btn"
+              type="button"
+              name="game"
+              data-testid="btn-play"
+              disabled={ disabled }
+              onClick={ this.handleClick }
+            >
+              Play
+            </button>
+            <button
+              className="btn"
+              type="button"
+              name="settings"
+              data-testid="btn-settings"
+              onClick={ this.handleClick }
+            >
+              Settings
+            </button>
+          </form>
+        </div>
+      </main>
     );
   }
 }

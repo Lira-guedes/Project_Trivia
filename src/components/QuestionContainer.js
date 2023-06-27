@@ -60,26 +60,32 @@ export default class QuestionContainer extends Component {
     } = this.props;
     const { next, disabled, counter } = this.state;
     return (
-      <>
-        <h2 data-testid="question-category">{category}</h2>
-        <p data-testid="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"').replace(/&rsquo;/g, '\'')}</p>
-        <AnswerButtons
-          correctAnswer={ correctAnswer }
-          incorrectAnswers={ incorrectAnswers }
-          showNextButton={ this.showNextButton }
-          disabled={ disabled }
-          timer={ counter }
-        />
-        {next && (
-          <button
-            data-testid="btn-next"
-            onClick={ this.handleNextButton }
-          >
-            Next
+      <div className="questions-container">
+        <div className="category">
+          <h2 data-testid="question-category">{category}</h2>
+        </div>
+        <div className="questions">
+          <h2 data-testid="question-text">{question.replace(/&#039;/g, '\'').replace(/&quot;/g, '"').replace(/&rsquo;/g, '\'')}</h2>
+          <AnswerButtons
+            correctAnswer={ correctAnswer }
+            incorrectAnswers={ incorrectAnswers }
+            showNextButton={ this.showNextButton }
+            disabled={ disabled }
+            timer={ counter }
+          />
+        </div>
+        <div className="next">
+          {next && (
+            <button
+              data-testid="btn-next"
+              onClick={ this.handleNextButton }
+            >
+              Next
 
-          </button>
-        )}
-      </>
+            </button>
+          )}
+        </div>
+      </div>
     );
   }
 }

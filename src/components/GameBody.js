@@ -1,4 +1,4 @@
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -86,12 +86,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 GameBody.propTypes = {
-  actionSaveQuestions: propTypes.func.isRequired,
-  actionGetCurrentQuestion: propTypes.func.isRequired,
-  questions: propTypes.arrayOf(propTypes.shape()).isRequired,
-  currentQuestion: propTypes.shape().isRequired,
-  history: propTypes.shape({
-    push: propTypes.func.isRequired,
+  actionSaveQuestions: PropTypes.func.isRequired,
+  actionGetCurrentQuestion: PropTypes.func.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  currentQuestion: PropTypes.shape().isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
