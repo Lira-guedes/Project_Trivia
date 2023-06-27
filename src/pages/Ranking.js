@@ -9,7 +9,7 @@ export default class Ranking extends Component {
 
   render() {
     return (
-      <div>
+      <div className="ranking-container">
         <h1 data-testid="ranking-title">Ranking</h1>
         <button
           data-testid="btn-go-home"
