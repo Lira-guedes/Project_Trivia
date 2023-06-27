@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 const THREE = 3;
@@ -28,17 +29,38 @@ class Feedback extends Component {
     });
   };
 
+  handleClick = () => {
+    const { history } = this.props;
+    history.push('/');
+  };
+
   render() {
     const { feedbackMessage } = this.state;
     return (
-      <main>
-        <Header />
-        <p data-testid="feedback-text">{feedbackMessage}</p>
+      <>
+        <main>
+          <Header />
+          <p data-testid="feedback-text">{feedbackMessage}</p>
 
-      </main>
+        </main>
+        <div>
+          <button
+            data-testid="btn-play-again"
+            onClick={ this.handleClick }
+          >
+            Play Again
+          </button>
+        </div>
+      </>
     );
   }
 }
+
+Feedback.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 const mapStateToProps = ({ player }) => ({
   numberOfRights: player.numberOfRights,

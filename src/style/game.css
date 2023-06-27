@@ -70,7 +70,7 @@ button {
   border: none;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) , 0 3px 6px rgba(0, 0, 0, 0.23);
-  color: #3f3e3e;
+  color: #2e2e2e;
   font-size: 14px;
   height: auto;
   margin-left: 20px;
@@ -92,7 +92,19 @@ button:hover {
   border: 3px solid rgb(6, 240, 15);
 }
 
+.correct-answer-colored:hover {
+  background-color: rgb(6, 240, 15);
+  border: 3px solid rgb(6, 240, 15);
+  color: black;
+}
+
 .incorrect-answer-colored {
   background-color : red;
   border: 3px solid red;
+}
+
+.incorrect-answer-colored:hover {
+  background-color: red;
+  border: 3px solid red;
+  color: black;
 }
