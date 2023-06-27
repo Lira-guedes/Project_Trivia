@@ -36,9 +36,24 @@ export default class QuestionContainer extends Component {
     clearInterval(this.timer);
   };
 
+  handleNextButton = () => {
+    const { handleNextClick } = this.props;
+    const buttons = Array.from(document.querySelectorAll('button'));
+    buttons.forEach((button) => {
+      if (button.className === 'correct-answer') {
+        button.classList.remove('correct-answer-colored');
+      } else {
+        button.classList.remove('incorrect-answer-colored');
+      }
+    });
+    this.setState({ next: false, disabled: false });
+    clearInterval(this.timer);
+    handleNextClick();
+  };
+
   render() {
     const {
-      question: {
+      currentQuestion: {
         category,
         question,
         correct_answer: correctAnswer, incorrect_answers: incorrectAnswers },
@@ -68,10 +83,11 @@ export default class QuestionContainer extends Component {
 }
 
 QuestionContainer.propTypes = {
-  question: PropTypes.shape({
+  currentQuestion: PropTypes.shape({
     category: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
     correct_answer: PropTypes.string.isRequired,
     incorrect_answers: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  handleNextClick: PropTypes.func.isRequired,
 };

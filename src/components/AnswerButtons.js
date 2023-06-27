@@ -13,6 +13,13 @@ class AnswerButtons extends Component {
     this.sortAnswers();
   }
 
+  componentDidUpdate(prevProps) {
+    const { currentQuestion } = this.props;
+    if (currentQuestion !== prevProps.currentQuestion) {
+      this.sortAnswers();
+    }
+  }
+
   sortAnswers = () => {
     const { correctAnswer, incorrectAnswers } = this.props;
     const correctAnswerObject = { id: 'correct-answer', answer: correctAnswer };
@@ -32,13 +39,8 @@ class AnswerButtons extends Component {
     buttons.forEach((button) => {
       if (button.className === 'correct-answer') {
         button.classList.add('correct-answer-colored');
-        /* button.style.backgroundColor = ' rgb(6, 240, 15)';
-        button.style.border = '3px solid rgb(6, 240, 15)'; */
       } else {
         button.classList.add('incorrect-answer-colored');
-        /*
-        button.style.backgroundColor = 'red';
-        button.style.border = '3px solid red'; */
       }
     });
     showNextButton();
@@ -62,6 +64,8 @@ class AnswerButtons extends Component {
   render() {
     const { sortedAnswers } = this.state;
     const { disabled } = this.props;
+    // console.log(this.props.currentQuestion);
+
     return (
       <div className="answers-btn">
         <section data-testid="answer-options">
@@ -88,6 +92,7 @@ class AnswerButtons extends Component {
 
 const mapStateToProps = (state) => ({
   difficultyQuestion: state.player.questions,
+  currentQuestion: state.player.currentQuestion,
 });
 
 AnswerButtons.propTypes = {
@@ -98,6 +103,12 @@ AnswerButtons.propTypes = {
   dispatch: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
   difficultyQuestion: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  currentQuestion: PropTypes.shape({
+    category: PropTypes.string.isRequired,
+    question: PropTypes.string.isRequired,
+    correct_answer: PropTypes.string.isRequired,
+    incorrect_answers: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(AnswerButtons);
