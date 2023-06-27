@@ -75,8 +75,8 @@ export default class QuestionContainer extends Component {
           />
         </div>
         <div className="next">
-            {next && (
-            <button
+          {next && (
+           <button
               data-testid="btn-next"
               onClick={ this.handleNextButton }
             >
