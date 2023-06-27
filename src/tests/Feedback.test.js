@@ -7,6 +7,8 @@ import App from '../App';
 describe('Teste da página de Feedback', () => {
   it('Verificação dos componentes na tela de Feedback', async () => {
     const { history } = renderWithRouterAndRedux(<App />)
+    act(() => { history.push('/feedback'); });
+
     const btnPlayAgain = screen.getByRole('button', {name: /play again/i});
     const btnRanking = screen.getByRole('button', {name: /ranking/i});
 
