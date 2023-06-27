@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 const THREE = 3;
@@ -39,9 +40,8 @@ class Feedback extends Component {
       <>
         <main>
           <Header />
-          <p data-testid="feedback-text">{feedbackMessage}</p>
-
-        </main>
+          <p data-testid="feedback-text">{ feedbackMessage }</p>
+        </div>
         <div>
           <button
             data-testid="btn-play-again"
@@ -55,18 +55,15 @@ class Feedback extends Component {
   }
 }
 
+const mapStateToProps = ({ player }) => ({
+  numberOfRights: player.correct_question,
+});
+
 Feedback.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-};
-
-const mapStateToProps = ({ player }) => ({
-  numberOfRights: player.numberOfRights,
-});
-
-Feedback.propTypes = {
   numberOfRights: PropTypes.number.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Feedback);
+export default connect(mapStateToProps)(Feedback);
