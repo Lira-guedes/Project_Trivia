@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 const THREE = 3;
