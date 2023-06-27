@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 export default class Feedback extends Component {
-  handleClick = () => {
+  redirectPlayAgay = () => {
     const { history } = this.props;
     history.push('/');
+  };
+
+  redirectRanking = () => {
+    const { history } = this.props;
+    history.push('/ranking');
   };
 
   render() {
@@ -18,9 +23,15 @@ export default class Feedback extends Component {
         <div>
           <button
             data-testid="btn-play-again"
-            onClick={ this.handleClick }
+            onClick={ this.redirectPlayAgay }
           >
             Play Again
+          </button>
+          <button
+            data-testid="btn-ranking"
+            onClick={ this.redirectRanking }
+          >
+            Ranking
           </button>
         </div>
       </>
