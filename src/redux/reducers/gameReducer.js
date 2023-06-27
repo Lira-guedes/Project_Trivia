@@ -3,7 +3,7 @@ import { GET_CURRENT_QUESTION, SAVE_QUESTIONS,
 
 const INITIAL_STATE = {
   score: 0,
-  correct_question: 0,
+  assertions: 0,
   questions: [
     {
       category: '',
@@ -41,7 +41,7 @@ const player = (state = INITIAL_STATE, action) => {
     return (
       {
         ...state,
-        correct_question: action.correct,
+        assertions: action.correct,
       });
   default:
     return state;

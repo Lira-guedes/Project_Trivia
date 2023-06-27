@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 const THREE = 3;
@@ -13,15 +14,15 @@ class Feedback extends Component {
   }
 
   getFeedbackMessage = () => {
-    const { numberOfRights } = this.props;
+    const { assertions } = this.props;
     let feedbackMessage;
-    if (numberOfRights < THREE) {
+    if (assertions < THREE) {
       feedbackMessage = 'Could be better...';
     } else {
       feedbackMessage = 'Well Done!';
     }
     this.setState({ feedbackMessage }, () => {
-      console.log(numberOfRights);
+      console.log(assertions);
     });
   };
 
@@ -37,11 +38,14 @@ class Feedback extends Component {
 
   render() {
     const { feedbackMessage } = this.state;
+    const { score, assertions } = this.props;
     return (
       <>
         <div>
           <Header />
           <p data-testid="feedback-text">{ feedbackMessage }</p>
+          <p data-testid="feedback-total-score">{ score }</p>
+          <p data-testid="feedback-total-question">{ assertions }</p>
         </div>
         <div>
           <button
@@ -63,14 +67,16 @@ class Feedback extends Component {
 }
 
 const mapStateToProps = ({ player }) => ({
-  numberOfRights: player.correct_question,
+  score: player.score,
+  assertions: player.assertions,
 });
 
 Feedback.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-  numberOfRights: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
