@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
@@ -16,36 +15,46 @@ class Feedback extends Component {
   getFeedbackMessage = () => {
     const { numberOfRights } = this.props;
     let feedbackMessage;
-
     if (numberOfRights < THREE) {
       feedbackMessage = 'Could be better...';
     } else {
       feedbackMessage = 'Well Done!';
     }
-
     this.setState({ feedbackMessage }, () => {
       console.log(numberOfRights);
     });
   };
 
-  handleClick = () => {
+  redirectPlayAgay = () => {
     const { history } = this.props;
     history.push('/');
+  };
+
+  redirectRanking = () => {
+    const { history } = this.props;
+    history.push('/ranking');
   };
 
   render() {
     const { feedbackMessage } = this.state;
     return (
       <>
-
-        <Header />
-        <p data-testid="feedback-text">{ feedbackMessage }</p>
+        <div>
+          <Header />
+          <p data-testid="feedback-text">{ feedbackMessage }</p>
+        </div>
         <div>
           <button
             data-testid="btn-play-again"
-            onClick={ this.handleClick }
+            onClick={ this.redirectPlayAgay }
           >
             Play Again
+          </button>
+          <button
+            data-testid="btn-ranking"
+            onClick={ this.redirectRanking }
+          >
+            Ranking
           </button>
         </div>
       </>
