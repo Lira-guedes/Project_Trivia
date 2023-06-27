@@ -1,4 +1,4 @@
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -46,7 +46,6 @@ class GameBody extends Component {
           !success ? <Redirect to="/" push />
             : questions && <QuestionContainer question={ questions[0] } />
         }
-
       </main>
     );
   }
@@ -61,8 +60,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 GameBody.propTypes = {
-  actionSaveQuestions: propTypes.func.isRequired,
-  questions: propTypes.arrayOf().isRequired,
+  actionSaveQuestions: PropTypes.func.isRequired,
+  questions: PropTypes.arrayOf().isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameBody);
