@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 export default class Feedback extends Component {
+  handleClick = () => {
+    const { history } = this.props;
+    console.log(this.props);
+    history.push('/');
+  };
+
   render() {
-    handleClick = () => {
-      const { history } = this.props;
-      history.push('/');
-    };
     return (
       <>
         <Header />
