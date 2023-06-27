@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWithRouterAndRedux';
 import App from '../App';
@@ -29,10 +29,10 @@ describe('Teste da página de Feedback', () => {
     const { history } = renderWithRouterAndRedux(<App />)
     act(() => { history.push('/feedback'); });
     expect(screen.getByTestId('feedback-text')).toBeInTheDocument();
-    // expect(screen.getByTestId('feedback-total-question')).toBeInTheDocument();
-    // expect(screen.getByTestId('feedback-total-score')).toBeInTheDocument();
-    // expect(screen.getByTestId('header-profile-picture')).toBeInTheDocument();
-    // expect(screen.getByTestId('header-player-name')).toBeInTheDocument();
-    // expect(screen.getByTestId('header-score')).toBeInTheDocument();
+    expect(screen.getByTestId('feedback-total-question')).toBeInTheDocument();
+    expect(screen.getByTestId('feedback-total-score')).toBeInTheDocument();
+    expect(screen.getByTestId('header-profile-picture')).toBeInTheDocument();
+    expect(screen.getByTestId('header-player-name')).toBeInTheDocument();
+    expect(screen.getByTestId('header-score')).toBeInTheDocument();
   })
 })
