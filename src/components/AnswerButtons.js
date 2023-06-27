@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addScore } from '../redux/actions';
+import { addScore, questionCorrect } from '../redux/actions';
 
 const ZERO_DOT_FIFE = 0.5;
 class AnswerButtons extends Component {
   state = {
     sortedAnswers: [],
+    correctQuestion: 0,
   };
 
   componentDidMount() {
@@ -57,7 +58,13 @@ class AnswerButtons extends Component {
 
     const points = minimumScore + (timer * difficulty);
     if (target.textContent === correctAnswer) {
-      dispatch(addScore(points));
+      this.setState((prevState) => ({
+        correctQuestion: prevState.correctQuestion + 1,
+      }), () => {
+        const { correctQuestion } = this.state;
+        dispatch(addScore(points));
+        dispatch(questionCorrect(correctQuestion));
+      });
     }
   };
 

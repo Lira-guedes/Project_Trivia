@@ -1,6 +1,7 @@
 export const SAVE_USER_DATA_IN_GLOBAL_STORE = 'SAVE_USER_DATA_IN_GLOBAL_STORE';
 export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
 export const SAVE_SCORE = 'SAVE_SCORE';
+export const SAVE_CORRECT = 'SAVE_CORRECT_QUESTION';
 
 export const GET_CURRENT_QUESTION = 'GET_CURRENT_QUESTION';
 
@@ -23,4 +24,9 @@ export const getCurrentQuestion = (questions, index) => ({
   type: GET_CURRENT_QUESTION,
   questions,
   index,
+});
+
+export const questionCorrect = (correct) => ({
+  type: SAVE_CORRECT,
+  correct,
 });
