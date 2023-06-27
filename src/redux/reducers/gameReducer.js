@@ -1,7 +1,9 @@
-import { GET_CURRENT_QUESTION, SAVE_QUESTIONS, SAVE_SCORE } from '../actions';
+import { GET_CURRENT_QUESTION, GET_NUM_OF_RIGHTS,
+  SAVE_QUESTIONS, SAVE_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   score: 0,
+  numberOfRights: 0,
   questions: [
     {
       category: '',
@@ -10,7 +12,6 @@ const INITIAL_STATE = {
       question: '',
       correct_answer: '',
       incorrect_answers: [
-
       ],
     },
   ],
@@ -35,7 +36,13 @@ const player = (state = INITIAL_STATE, action) => {
         ...state,
         currentQuestion: action.questions[action.index],
       });
-
+  case GET_NUM_OF_RIGHTS:
+    return (
+      {
+        ...state,
+        numberOfRights: state.numberOfRights + 1,
+      }
+    );
   default:
     return state;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addScore } from '../redux/actions';
+import { addScore, getNumberOfRights } from '../redux/actions';
 
 const ZERO_DOT_FIFE = 0.5;
 class AnswerButtons extends Component {
@@ -58,6 +58,7 @@ class AnswerButtons extends Component {
     const points = minimumScore + (timer * difficulty);
     if (target.textContent === correctAnswer) {
       dispatch(addScore(points));
+      dispatch(getNumberOfRights());
     }
   };
 
@@ -73,7 +74,7 @@ class AnswerButtons extends Component {
             sortedAnswers && sortedAnswers.map(({ answer, id }) => (
               <button
                 key={ answer }
-                data-testId={ id }
+                data-testid={ id }
                 className={ id }
                 onClick={ (e) => this.handleClick(e) }
                 disabled={ disabled }
